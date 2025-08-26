@@ -15,7 +15,7 @@ export default defineConfig({
           components: {
             Hero: "./src/components/hero.astro",
           },
-          social: [{ icon: 'github', label: 'GitHub', href: 'https://github.com/withastro/starlight' }],
+        //   social: [{ icon: 'github', label: 'GitHub', href: 'https://github.com/withastro/starlight' }],
           sidebar: [
             {
               label: "Development",
