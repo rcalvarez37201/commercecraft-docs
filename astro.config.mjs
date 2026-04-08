@@ -209,6 +209,10 @@ export default defineConfig({
                   label: "Ejemplo",
                   slug: "reference/example",
                 },
+                {
+                  label: "Guia de contribucion editorial",
+                  slug: "reference/guia-contribucion",
+                },
               ],
             },
           ],
