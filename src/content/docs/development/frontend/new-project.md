@@ -1,4 +1,5 @@
 ---
+description: Guia tecnica de frontend con pasos de implementacion, validacion y soporte.
 title: Iniciando un proyecto
 ---
 
@@ -44,3 +45,30 @@ Con estos pasos ya podemos empezar a trabajar en el proyecto 😊.
 - [ ] `frontastic init` ejecutado con token válido.
 - [ ] Dependencias instaladas correctamente.
 - [ ] Proyecto ejecutando en local y accesible.
+
+## Objetivo
+
+Define brevemente que resuelve esta guia y cuando aplica.
+
+## Prerrequisitos
+
+- Accesos necesarios.
+- Herramientas requeridas.
+
+## Pasos
+
+1. Ejecutar el procedimiento principal descrito en esta guia.
+2. Ajustar segun el contexto del proyecto.
+
+## Validación
+
+- Confirmar resultado esperado en entorno objetivo.
+- Verificar que no haya errores en consola o logs.
+
+## Rollback
+
+- Revertir cambios realizados en esta guia si el resultado no es el esperado.
+
+## Errores comunes
+
+- Revisar credenciales, variables de entorno y rutas antes de reintentar.

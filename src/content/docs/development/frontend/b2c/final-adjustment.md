@@ -1,4 +1,5 @@
 ---
+description: Guia tecnica de frontend con pasos de implementacion, validacion y soporte.
 title: Ajustes Finales
 tags:
   - frontend
@@ -160,3 +161,30 @@ Cambiar el límite a **500**.
 - [ ] Suffix eliminado y validado en imágenes.
 - [ ] Header/footer revisados según requerimientos visuales.
 - [ ] Favicon, title y analytics comprobados en entorno final.
+
+## Objetivo
+
+Define brevemente que resuelve esta guia y cuando aplica.
+
+## Prerrequisitos
+
+- Accesos necesarios.
+- Herramientas requeridas.
+
+## Pasos
+
+1. Ejecutar el procedimiento principal descrito en esta guia.
+2. Ajustar segun el contexto del proyecto.
+
+## Validación
+
+- Confirmar resultado esperado en entorno objetivo.
+- Verificar que no haya errores en consola o logs.
+
+## Rollback
+
+- Revertir cambios realizados en esta guia si el resultado no es el esperado.
+
+## Errores comunes
+
+- Revisar credenciales, variables de entorno y rutas antes de reintentar.
