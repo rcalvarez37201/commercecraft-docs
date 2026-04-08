@@ -1,5 +1,7 @@
 ---
 title: Plantilla base para guías
+tags:
+  - frontend
 ---
 
 Usa esta plantilla para documentar cambios técnicos de forma consistente.

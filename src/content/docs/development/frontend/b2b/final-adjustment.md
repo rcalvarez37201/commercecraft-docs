@@ -1,5 +1,8 @@
 ---
 title: Ajustes finales
+tags:
+  - frontend
+  - b2b
 ---
 
 1. Eliminar el atributo suffix en las imagenes.

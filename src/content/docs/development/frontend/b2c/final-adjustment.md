@@ -1,5 +1,8 @@
 ---
 title: Ajustes Finales
+tags:
+  - frontend
+  - b2c
 ---
 
 Se deben tener en cuenta los siguientes pasos para realizar los ajustes finales del proyecto.
@@ -133,7 +136,7 @@ luego quitar importaciones y variables que dejan de utilizarce.
 
 Para ver los detalles de cada paso acceder al artículo: [Google Analytics](/development/frontend/google-analytics)
 
-### Ajustar el límite para las categorías 
+### Ajustar el límite para las categorías
 
 Acceder a la siguiente ruta:
 

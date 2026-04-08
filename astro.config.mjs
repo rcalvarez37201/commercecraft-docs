@@ -8,6 +8,11 @@ import commercecraftLogoWhite from './src/assets/commercecraft_white.svg';
 
 // https://astro.build/config
 export default defineConfig({
+  site: 'https://docs.commercecraft.dev',
+  redirects: {
+    '/development/frontend/b2c/final-adjusment': '/development/frontend/b2c/final-adjustment',
+    '/development/frontend/b2b/final-adjusment': '/development/frontend/b2b/final-adjustment',
+  },
   integrations: [
       starlight({
           title: 'My Docs',
@@ -131,7 +136,7 @@ export default defineConfig({
                         },
                         {
                           label: "Ajustes Finales",
-                          slug: "development/frontend/b2c/final-adjusment",
+                          slug: "development/frontend/b2c/final-adjustment",
                         },
                       ],
                     },
@@ -156,7 +161,7 @@ export default defineConfig({
                         },
                         {
                           label: "Ajustes finales",
-                          slug: "development/frontend/b2b/final-adjusment",
+                          slug: "development/frontend/b2b/final-adjustment",
                         },
                       ],
                     },

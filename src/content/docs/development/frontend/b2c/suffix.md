@@ -28,7 +28,7 @@ Podemos utilizar varias vías. Recomendado:
 
 - Desde nuestro editor de código: VSCode, Cursor, etc. Ir a la sección del buscador dentro de los archivos del proyecto y buscar por la siguiente instrucción: "suffix=" y eliminar todas las instancias del mismo dentro de los archivos del proyecto.
 
-Esta es una tarea importante dentro de los [Ajustes Finales del Proyecto](/development/frontend/b2c/final-adjusment).
+Esta es una tarea importante dentro de los [Ajustes Finales del Proyecto](/development/frontend/b2c/final-adjustment).
 
 ## Validación
 
