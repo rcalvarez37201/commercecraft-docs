@@ -1,5 +1,6 @@
 ---
 title: Plantilla base para guías
+description: Estructura recomendada para crear guias tecnicas consistentes y faciles de validar.
 tags:
   - frontend
 ---
