@@ -3,3 +3,34 @@
 @import '@astrojs/starlight-tailwind';
 @import 'tailwindcss/theme.css' layer(theme);
 @import 'tailwindcss/utilities.css' layer(utilities);
+
+@layer components {
+  .path-copy {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    margin-right: 0.2rem;
+    vertical-align: baseline;
+  }
+
+  .path-copy__button {
+    border: 1px solid var(--sl-color-gray-5);
+    border-radius: 0.375rem;
+    background-color: var(--sl-color-bg-nav);
+    color: var(--sl-color-text-accent);
+    cursor: pointer;
+    font-size: 0.7rem;
+    line-height: 1;
+    padding: 0.25rem 0.4rem;
+    transition: opacity 0.2s ease;
+  }
+
+  .path-copy__button:hover {
+    opacity: 0.85;
+  }
+
+  .path-copy__button.is-copied {
+    color: var(--sl-color-green);
+    border-color: var(--sl-color-green-high);
+  }
+}

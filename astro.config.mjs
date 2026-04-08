@@ -20,6 +20,7 @@ export default defineConfig({
           ],
           components: {
             Hero: "./src/components/hero.astro",
+            Head: "./src/components/head.astro",
           },
         //   social: [{ icon: 'github', label: 'GitHub', href: 'https://github.com/withastro/starlight' }],
           sidebar: [

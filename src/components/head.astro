@@ -1,0 +1,77 @@
+<script is:inline>
+  const FILE_PATH_PATTERN =
+    /^(?:\.{1,2}[\\/]|[A-Za-z]:[\\/]|\/)?(?:[^\\/\s]+[\\/])+[^\\/\s]+$/;
+
+  function isProbablyFilePath(value) {
+    if (!value) return false;
+    if (value.length < 3 || value.length > 180) return false;
+    if (!FILE_PATH_PATTERN.test(value)) return false;
+    return /[\\/]/.test(value);
+  }
+
+  async function copyToClipboard(text, trigger) {
+    try {
+      await navigator.clipboard.writeText(text);
+      const previous = trigger.textContent;
+      trigger.textContent = "Copiado";
+      trigger.classList.add("is-copied");
+      window.setTimeout(() => {
+        trigger.textContent = previous;
+        trigger.classList.remove("is-copied");
+      }, 1400);
+    } catch {
+      trigger.textContent = "Error";
+      window.setTimeout(() => {
+        trigger.textContent = "Copiar";
+      }, 1400);
+    }
+  }
+
+  function decoratePathCode(codeEl) {
+    if (codeEl.dataset.pathCopyReady === "true") return;
+    const rawText = codeEl.textContent?.trim() ?? "";
+    if (!isProbablyFilePath(rawText)) return;
+    if (codeEl.closest("pre")) return;
+
+    const wrapper = document.createElement("span");
+    wrapper.className = "path-copy";
+
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "path-copy__button";
+    button.textContent = "Copiar";
+    button.setAttribute("aria-label", `Copiar ruta ${rawText}`);
+
+    button.addEventListener("click", () => copyToClipboard(rawText, button));
+
+    codeEl.dataset.pathCopyReady = "true";
+    const parent = codeEl.parentNode;
+    if (!parent) return;
+
+    parent.insertBefore(wrapper, codeEl);
+    wrapper.appendChild(codeEl);
+    wrapper.appendChild(button);
+  }
+
+  function scanAndDecorate(root = document) {
+    const candidates = root.querySelectorAll(
+      ".sl-markdown-content p > code, .sl-markdown-content li > code, .sl-markdown-content td > code"
+    );
+    candidates.forEach((node) => decoratePathCode(node));
+  }
+
+  const observer = new MutationObserver((mutations) => {
+    for (const mutation of mutations) {
+      mutation.addedNodes.forEach((node) => {
+        if (node instanceof HTMLElement) {
+          scanAndDecorate(node);
+        }
+      });
+    }
+  });
+
+  document.addEventListener("astro:page-load", () => {
+    scanAndDecorate();
+    observer.observe(document.body, { childList: true, subtree: true });
+  });
+</script>
