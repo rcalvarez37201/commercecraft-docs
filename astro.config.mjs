@@ -194,6 +194,23 @@ export default defineConfig({
               label: "Project set-up by Luciano",
               slug: "project-setup-by-luciano",
             },
+            {
+              label: "Reference",
+              items: [
+                {
+                  label: "Glosario de terminos",
+                  slug: "reference/glosario",
+                },
+                {
+                  label: "Plantilla base para guias",
+                  slug: "reference/plantilla-guia",
+                },
+                {
+                  label: "Example",
+                  slug: "reference/example",
+                },
+              ],
+            },
           ],
       }),
 	],
