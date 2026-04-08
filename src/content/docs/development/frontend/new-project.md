@@ -33,3 +33,8 @@ frontastic run
 Este comando iniciará el proyecto en el puerto local 3000.
 
 Con estos pasos ya podemos empezar a trabajar en el proyecto 😊.
+
+## Relacionado
+
+- [Preparando el entorno de desarrollo](/development/frontend/development-environment)
+- [Agregar Google Analytics al proyecto](/development/frontend/google-analytics)

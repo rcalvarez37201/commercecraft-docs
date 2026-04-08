@@ -189,3 +189,8 @@ useEffect(() => {
 
   }, []);
 ```
+
+## Relacionado
+
+- [Checkout Config](/development/checkout-config)
+- [Agregar Google Analytics al proyecto](/development/frontend/google-analytics)

@@ -149,3 +149,8 @@ this.queryCategories({ limit: 250, format: CategoryQueryFormat.TREE })
 ```
 
 Cambiar el límite a **500**.
+
+## Relacionado
+
+- [Atributo suffix en imágenes](/development/frontend/b2c/suffix)
+- [Agregar Google Analytics al proyecto](/development/frontend/google-analytics)
