@@ -33,4 +33,8 @@
     color: var(--sl-color-green);
     border-color: var(--sl-color-green-high);
   }
+
+  .path-copy-paragraph .path-copy__button {
+    margin-left: 0.25rem;
+  }
 }

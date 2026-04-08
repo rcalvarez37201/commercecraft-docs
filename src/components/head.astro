@@ -9,9 +9,37 @@
     return /[\\/]/.test(value);
   }
 
+  function legacyCopyToClipboard(text) {
+    const textarea = document.createElement("textarea");
+    textarea.value = text;
+    textarea.setAttribute("readonly", "");
+    textarea.style.position = "fixed";
+    textarea.style.top = "-1000px";
+    textarea.style.left = "-1000px";
+    document.body.appendChild(textarea);
+    textarea.focus();
+    textarea.select();
+
+    let ok = false;
+    try {
+      ok = document.execCommand("copy");
+    } catch {
+      ok = false;
+    }
+
+    document.body.removeChild(textarea);
+    return ok;
+  }
+
   async function copyToClipboard(text, trigger) {
     try {
-      await navigator.clipboard.writeText(text);
+      if (navigator.clipboard?.writeText) {
+        await navigator.clipboard.writeText(text);
+      } else {
+        const copied = legacyCopyToClipboard(text);
+        if (!copied) throw new Error("Clipboard unavailable");
+      }
+
       const previous = trigger.textContent;
       trigger.textContent = "Copiado";
       trigger.classList.add("is-copied");
@@ -20,29 +48,43 @@
         trigger.classList.remove("is-copied");
       }, 1400);
     } catch {
-      trigger.textContent = "Error";
-      window.setTimeout(() => {
-        trigger.textContent = "Copiar";
-      }, 1400);
+      const copied = legacyCopyToClipboard(text);
+      if (copied) {
+        const previous = trigger.textContent;
+        trigger.textContent = "Copiado";
+        trigger.classList.add("is-copied");
+        window.setTimeout(() => {
+          trigger.textContent = previous;
+          trigger.classList.remove("is-copied");
+        }, 1400);
+      } else {
+        trigger.textContent = "Error";
+        window.setTimeout(() => {
+          trigger.textContent = "Copiar";
+        }, 1400);
+      }
     }
+  }
+
+  function createCopyButton(text) {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "path-copy__button";
+    button.textContent = "Copiar";
+    button.setAttribute("aria-label", `Copiar ruta ${text}`);
+    button.addEventListener("click", () => copyToClipboard(text, button));
+    return button;
   }
 
   function decoratePathCode(codeEl) {
     if (codeEl.dataset.pathCopyReady === "true") return;
     const rawText = codeEl.textContent?.trim() ?? "";
     if (!isProbablyFilePath(rawText)) return;
-    if (codeEl.closest("pre")) return;
 
     const wrapper = document.createElement("span");
     wrapper.className = "path-copy";
 
-    const button = document.createElement("button");
-    button.type = "button";
-    button.className = "path-copy__button";
-    button.textContent = "Copiar";
-    button.setAttribute("aria-label", `Copiar ruta ${rawText}`);
-
-    button.addEventListener("click", () => copyToClipboard(rawText, button));
+    const button = createCopyButton(rawText);
 
     codeEl.dataset.pathCopyReady = "true";
     const parent = codeEl.parentNode;
@@ -53,11 +95,28 @@
     wrapper.appendChild(button);
   }
 
+  function decoratePathParagraph(paragraphEl) {
+    if (paragraphEl.dataset.pathCopyReady === "true") return;
+    if (paragraphEl.querySelector("code, a, button")) return;
+    const rawText = paragraphEl.textContent?.trim() ?? "";
+    if (!isProbablyFilePath(rawText)) return;
+
+    paragraphEl.dataset.pathCopyReady = "true";
+    paragraphEl.classList.add("path-copy-paragraph");
+    paragraphEl.appendChild(document.createTextNode(" "));
+    paragraphEl.appendChild(createCopyButton(rawText));
+  }
+
   function scanAndDecorate(root = document) {
-    const candidates = root.querySelectorAll(
+    const inlineCodeCandidates = root.querySelectorAll(
       ".sl-markdown-content p > code, .sl-markdown-content li > code, .sl-markdown-content td > code"
     );
-    candidates.forEach((node) => decoratePathCode(node));
+    inlineCodeCandidates.forEach((node) => decoratePathCode(node));
+
+    const blockquotePathCandidates = root.querySelectorAll(
+      ".sl-markdown-content blockquote p"
+    );
+    blockquotePathCandidates.forEach((node) => decoratePathParagraph(node));
   }
 
   const observer = new MutationObserver((mutations) => {
@@ -70,8 +129,22 @@
     }
   });
 
-  document.addEventListener("astro:page-load", () => {
+  let observerStarted = false;
+  function initPathCopy() {
     scanAndDecorate();
-    observer.observe(document.body, { childList: true, subtree: true });
-  });
+    if (!observerStarted) {
+      observer.observe(document.body, { childList: true, subtree: true });
+      observerStarted = true;
+    }
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initPathCopy, { once: true });
+  } else {
+    initPathCopy();
+  }
+
+  // Astro/Starlight client-side navigation events.
+  document.addEventListener("astro:page-load", initPathCopy);
+  document.addEventListener("astro:after-swap", initPathCopy);
 </script>
