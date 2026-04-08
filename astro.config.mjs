@@ -15,7 +15,7 @@ export default defineConfig({
   },
   integrations: [
       starlight({
-          title: 'My Docs',
+          title: 'Commercecraft Docs',
           logo: {
             light: commercecraftLogo,
             dark: commercecraftLogoWhite,
@@ -32,10 +32,10 @@ export default defineConfig({
         //   social: [{ icon: 'github', label: 'GitHub', href: 'https://github.com/withastro/starlight' }],
           sidebar: [
             {
-              label: "Development",
+              label: "Desarrollo",
               items: [
                 {
-                  label: "Getting Started",
+                  label: "Primeros pasos",
                   slug: "development",
                 },
                 {
@@ -87,7 +87,7 @@ export default defineConfig({
                       slug: "development/frontend/migrating-yarn",
                     },
                     {
-                      label: "Warnings",
+                      label: "Advertencias",
                       slug: "development/frontend/warning",
                     },
                     {
@@ -172,30 +172,30 @@ export default defineConfig({
                 //   slug: "development/scraping/scraping",
                 // },
                 {
-                  label: "AI",
+                  label: "IA",
                   slug: "development/ai",
                 },
                 {
-                  label: "Checkout Config",
+                  label: "Configuracion de checkout",
                   slug: "development/checkout-config",
                 },
                 {
-                  label: "Add or Change Languages in the Project",
+                  label: "Agregar o cambiar idiomas en el proyecto",
                   slug: "development/languages",
                 },
               ],
               //   autogenerate: { directory: 'development' },
             },
             {
-              label: "Keys",
+              label: "Claves",
               slug: "keys",
             },
             {
-              label: "Project set-up by Luciano",
+              label: "Configuracion de proyecto por Luciano",
               slug: "project-setup-by-luciano",
             },
             {
-              label: "Reference",
+              label: "Referencia",
               items: [
                 {
                   label: "Glosario de terminos",
@@ -206,7 +206,7 @@ export default defineConfig({
                   slug: "reference/plantilla-guia",
                 },
                 {
-                  label: "Example",
+                  label: "Ejemplo",
                   slug: "reference/example",
                 },
               ],
