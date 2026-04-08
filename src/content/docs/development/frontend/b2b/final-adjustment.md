@@ -194,3 +194,9 @@ useEffect(() => {
 
 - [Checkout Config](/development/checkout-config)
 - [Agregar Google Analytics al proyecto](/development/frontend/google-analytics)
+
+## Checklist final
+
+- [ ] Ajustes de UI/UX aplicados (banner, logo, slider, auth).
+- [ ] Límite de categorías actualizado y validado.
+- [ ] Flujo de compra probado incluyendo limpieza de carrito.

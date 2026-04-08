@@ -154,3 +154,9 @@ Cambiar el límite a **500**.
 
 - [Atributo suffix en imágenes](/development/frontend/b2c/suffix)
 - [Agregar Google Analytics al proyecto](/development/frontend/google-analytics)
+
+## Checklist final
+
+- [ ] Suffix eliminado y validado en imágenes.
+- [ ] Header/footer revisados según requerimientos visuales.
+- [ ] Favicon, title y analytics comprobados en entorno final.

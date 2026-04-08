@@ -38,3 +38,9 @@ Con estos pasos ya podemos empezar a trabajar en el proyecto 😊.
 
 - [Preparando el entorno de desarrollo](/development/frontend/development-environment)
 - [Agregar Google Analytics al proyecto](/development/frontend/google-analytics)
+
+## Checklist final
+
+- [ ] `frontastic init` ejecutado con token válido.
+- [ ] Dependencias instaladas correctamente.
+- [ ] Proyecto ejecutando en local y accesible.
