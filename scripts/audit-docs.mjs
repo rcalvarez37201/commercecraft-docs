@@ -47,7 +47,7 @@ function withoutFrontmatter(content) {
   return content.slice(end + 4);
 }
 
-function parseFrontmatterTitle(content) {
+function parseFrontmatter(content) {
   if (!content.startsWith('---')) {
     return null;
   }
@@ -57,13 +57,22 @@ function parseFrontmatterTitle(content) {
     return null;
   }
 
-  const frontmatter = content.slice(3, end);
-  const titleMatch = frontmatter.match(/^\s*title\s*:\s*(.+)\s*$/m);
-  if (!titleMatch) {
+  return content.slice(3, end);
+}
+
+function parseFrontmatterField(frontmatter, field) {
+  if (!frontmatter) {
     return null;
   }
 
-  return titleMatch[1].trim().replace(/^['"]|['"]$/g, '');
+  const fieldMatch = frontmatter.match(
+    new RegExp(`^\\s*${field}\\s*:\\s*(.+)\\s*$`, 'm')
+  );
+  if (!fieldMatch) {
+    return null;
+  }
+
+  return fieldMatch[1].trim().replace(/^['"]|['"]$/g, '');
 }
 
 function toRouteSlug(filePath) {
@@ -95,11 +104,14 @@ async function runAudit() {
   const titleIssues = [];
   const slugIssues = [];
   const templateIssues = [];
+  const metadataIssues = [];
 
   for (const filePath of files) {
     const raw = await readFile(filePath, 'utf8');
     const routeSlug = toRouteSlug(filePath);
-    const title = parseFrontmatterTitle(raw);
+    const frontmatter = parseFrontmatter(raw);
+    const title = parseFrontmatterField(frontmatter, 'title');
+    const description = parseFrontmatterField(frontmatter, 'description');
 
     if (title) {
       const found = duplicateTitleMap.get(title) ?? [];
@@ -136,6 +148,19 @@ async function runAudit() {
         );
       }
     }
+
+    const missingMetadata = [];
+    if (!title) {
+      missingMetadata.push('title');
+    }
+    if (!description) {
+      missingMetadata.push('description');
+    }
+    if (missingMetadata.length > 0) {
+      metadataIssues.push(
+        `${routeSlug || '/'}: faltan metadatos -> ${missingMetadata.join(', ')}`
+      );
+    }
   }
 
   for (const [title, slugs] of duplicateTitleMap) {
@@ -145,7 +170,10 @@ async function runAudit() {
   }
 
   const hasIssues =
-    titleIssues.length > 0 || slugIssues.length > 0 || templateIssues.length > 0;
+    titleIssues.length > 0 ||
+    slugIssues.length > 0 ||
+    templateIssues.length > 0 ||
+    metadataIssues.length > 0;
 
   console.log('\n== Auditoria de documentacion ==');
   console.log(`Archivos analizados: ${files.length}`);
@@ -173,6 +201,15 @@ async function runAudit() {
     console.log('- OK: todas las guias cumplen plantilla');
   } else {
     for (const issue of templateIssues) {
+      console.log(`- ${issue}`);
+    }
+  }
+
+  console.log('\n4) Metadatos obligatorios');
+  if (metadataIssues.length === 0) {
+    console.log('- OK: todos los documentos tienen title y description');
+  } else {
+    for (const issue of metadataIssues) {
       console.log(`- ${issue}`);
     }
   }
