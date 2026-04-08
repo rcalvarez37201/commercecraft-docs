@@ -4,6 +4,7 @@ import starlight from '@astrojs/starlight';
 
 import tailwindcss from '@tailwindcss/vite';
 import commercecraftLogo from './src/assets/commercecraft.svg';
+import commercecraftLogoWhite from './src/assets/commercecraft_white.svg';
 
 // https://astro.build/config
 export default defineConfig({
@@ -11,7 +12,8 @@ export default defineConfig({
       starlight({
           title: 'My Docs',
           logo: {
-            src: commercecraftLogo,
+            light: commercecraftLogo,
+            dark: commercecraftLogoWhite,
             alt: 'Commercecraft',
             replacesTitle: true,
           },
