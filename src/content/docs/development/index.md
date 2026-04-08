@@ -1,5 +1,6 @@
 ---
 title: Commercecraft Docs
+description: Punto de entrada para la documentacion de desarrollo frontend y backend de Commercecraft.
 tags:
   - frontend
   - backend
