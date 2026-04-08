@@ -3,12 +3,18 @@ import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
 
 import tailwindcss from '@tailwindcss/vite';
+import commercecraftLogo from './src/assets/commercecraft.svg';
 
 // https://astro.build/config
 export default defineConfig({
   integrations: [
       starlight({
           title: 'My Docs',
+          logo: {
+            src: commercecraftLogo,
+            alt: 'Commercecraft',
+            replacesTitle: true,
+          },
           customCss: [
             './src/styles/global.css',
           ],
